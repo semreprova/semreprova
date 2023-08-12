@@ -1,0 +1,24 @@
+# Armazenamento de dados de publicidade usando chaves e valores simples
+
+# Armazenamento de informações de anúncios
+SET anuncio:1 "Anúncio de produtos"
+SET anuncio:2 "Anúncio de desconto"
+SET anuncio:3 "Anúncio de evento"
+
+# Armazenamento de dados de campanhas de publicidade
+HMSET campanha:1 nome "Campanha de Verão" inicio "2023-06-01" fim "2023-08-31" orçamento "10000"
+HMSET campanha:2 nome "Campanha de Natal" inicio "2023-11-15" fim "2023-12-31" orçamento "15000"
+
+# Armazenamento de métricas de cliques em anúncios
+INCR cliques:anuncio:1
+INCR cliques:anuncio:2
+INCR cliques:anuncio:3
+
+# Armazenamento de contagem de impressões de anúncios
+INCR impressoes:anuncio:1
+INCR impressoes:anuncio:2
+INCR impressoes:anuncio:3
+
+# Armazenamento de sessões de usuários
+SETEX sessao:usuario1234 3600 "token_de_sessao_aqui"
+SETEX sessao:usuario5678 3600 "token_de_sessao_aqui"

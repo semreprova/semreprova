@@ -1,0 +1,16 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+# Função para verificar o formato do email
+sub validate_email_format {
+    my ($email) = @_;
+    return $email =~ /\@.*\.com$/;
+}
+
+# Função para verificar a complexidade da senha
+sub validate_password_complexity {
+    my ($password) = @_;
+    return $password =~ /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=!/?><]).*$/;
+} 

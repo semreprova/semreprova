@@ -1,0 +1,47 @@
+procedure TForm1.BtnCreateBackupClick(Sender: TObject);
+const
+  SourceDirectory = 'C:\caminho\para\a\pasta\da\plataforma';
+  BackupDirectory = 'C:\caminho\para\a\pasta\de\backup';
+begin
+  CreateBackup(SourceDirectory, BackupDirectory);
+end;
+
+
+
+unit BackupPlatform;
+
+interface
+
+uses
+  SysUtils, Classes, ShellAPI;
+
+procedure CreateBackup(const sourceDirectory, backupDirectory: string);
+
+implementation
+
+procedure CreateBackup(const sourceDirectory, backupDirectory: string);
+var
+  sourcePath, backupPath: string;
+  backupFileName: string;
+begin
+  sourcePath := IncludeTrailingPathDelimiter(sourceDirectory);
+  backupPath := IncludeTrailingPathDelimiter(backupDirectory);
+
+  backupFileName := 'platform_backup_' + FormatDateTime('yyyymmdd_hhnnss', Now) + '.zip';
+  backupFileName := backupPath + backupFileName;
+
+  if DirectoryExists(sourcePath) then
+  begin
+    try
+      ShellExecute(0, 'open', '7za.exe', PChar('a -r ' + backupFileName + ' ' + sourcePath + '*'), nil, SW_HIDE);
+      Writeln('Backup created successfully: ', backupFileName);
+    except
+      on E: Exception do
+        Writeln('Error creating backup: ', E.Message);
+    end;
+  end
+  else
+    Writeln('Source directory does not exist: ', sourcePath);
+end;
+
+end.
